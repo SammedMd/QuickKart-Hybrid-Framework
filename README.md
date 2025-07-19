@@ -1,77 +1,66 @@
-QuickKart Hybrid Automation Framework
+# QuickKart Hybrid Automation Framework 🚀
 
-Hybrid Selenium Framework for Demowebshop/QuickKart
-A Modular, Data-Driven Test Automation Framework built with Selenium WebDriver, TestNG, Maven, and the Page Object Model.
+This is a Hybrid Test Automation Framework built using **Java**, **Selenium WebDriver**, **TestNG**, **Maven**, and **Apache POI**.  
+The project is based on the demo e-commerce application **DemoWebShop** and will be enhanced module-by-module.
 
-🚀 Project Status
-✅ Register module (Excel-driven)
-🔜 Login module (in progress)
-🔜 Add to Cart module (upcoming)
-🔜 Checkout & My Orders modules (planned)
+---
 
-🛠️ Tech Stack
-Java 11+
-Selenium WebDriver
-TestNG
-Maven
-Page Object Model (POM)
-Apache POI (Excel Data)
-log4j2 (Logging)
-ExtentReports (HTML Reports)
-WebDriverManager
+## ✅ Completed Modules
 
-📂 Project Structure
-QuickKart-Hybrid-Framework/
-├── pom.xml
-├── testng.xml
-├── README.md
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   ├── base
-│   │   │   │   └── BaseClass.java
-│   │   │   ├── pages
-│   │   │   │   └── RegisterPage.java
-│   │   │   └── utilities
-│   │   │       ├── ConfigurationReader.java
-│   │   │       ├── ExcelUtils.java
-│   │   │       └── DataProviderUtils.java
-│   │   └── resources
-│   │       ├── config.properties
-│   │       ├── log4j2.properties
-│   │       └── testdata
-│   │           └── TestData.xlsx
-│   └── test
-│       └── java
-│           └── testcases
-│               └── RegisterTest.java
+- [x] **Register Module** — Dynamic data-driven registration using Excel
+- [ ] **Login Module** — (Coming Next)
+- [ ] **Add to Cart**
+- [ ] **Checkout**
+- [ ] **My Orders**
+- [ ] **Reports, Logs & Screenshots**
 
-⚙️ Setup & Execution
-Clone the repository:
-git clone https://github.com/SammedMd/QuickKart-Hybrid-Framework.git
-cd QuickKart-Hybrid-Framework
+---
 
-Configure Properties:
-Open src/main/resources/config.properties and update:
-browser=chrome
-url=https://demowebshop.tricentis.com
+## 🔧 Technologies & Tools Used
 
-Install dependencies & build:
-mvn clean compile
-Run tests:
-Via TestNG XML:
-mvn test -DsuiteXmlFile=testng.xml
+- Java
+- Selenium WebDriver
+- TestNG
+- Apache POI (for Excel data)
+- Maven
+- Log4j (logging)
+- Extent Reports (coming soon)
+- Git & GitHub
 
-📊 Reports & Logs
-ExtentReports: After execution, open test-output/ExtentReport.html for detailed HTML reports.
-Logs: Check console output for log4j2 messages.
+---
 
-🤝 Contributing
-Fork the repo
-Create a feature branch (git checkout -b feature/LoginModule)
-Commit changes (git commit -m "Add Login module")
-Push branch (git push origin feature/LoginModule)
-Open a Pull Request
+## 📂 Framework Structure
 
-📜 License
-This project is open-source and available under the MIT License.
+src/
+│
+├── test/java/
+│ ├── base/ # Base setup and teardown
+│ ├── pages/ # Page Object Model classes
+│ ├── testcases/ # All TestNG test classes
+│ ├── utilities/ # ExcelUtils, DataProvider, ConfigReader
+│
+├── main/resources/
+│ ├── testdata/ # Testdata Excel files
+│ ├── config.properties # App configurations
+│
+└── testng.xml # TestNG Suite File
+
+---
+
+## 🧪 How to Run the Tests
+1. Clone the repo  
+2. Open in Eclipse/VS Code  
+3. Update `config.properties` with browser + URL  
+4. Right-click on `testng.xml` → Run As → TestNG Suite
+
+---
+
+## 📌 Author
+- **Sammed Mudeppagol**  
+  QA Automation Engineer | [LinkedIn](https://www.linkedin.com/in/sammedmd/)  
+  📧 Email: mdsammed07@gmail.com  
+
+---
+
+## 📌 Note
+> This is an ongoing project. More modules like login, cart, checkout, and reports will be added daily. Stay tuned!
