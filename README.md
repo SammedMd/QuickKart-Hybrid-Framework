@@ -29,23 +29,22 @@ The project is based on the demo e-commerce application **DemoWebShop** and will
 
 ---
 
-## 📂 Framework Structure
+## 🧱 Framework Structure
 
+```
 src/
-│
 ├── test/java/
-│ ├── base/ # Base setup and teardown
-│ ├── pages/ # Page Object Model classes
-│ ├── testcases/ # All TestNG test classes
-│ ├── utilities/ # ExcelUtils, DataProvider, ConfigReader
+│   ├── base/             # Base setup and teardown
+│   ├── pages/            # Page Object Model classes
+│   ├── testcases/        # All TestNG test classes
+│   ├── utilities/        # ExcelUtils, DataProvider, ConfigReader
 │
 ├── main/resources/
-│ ├── testdata/ # Testdata Excel files
-│ ├── config.properties # App configurations
+│   ├── testdata/         # Testdata Excel files
+│   └── config.properties # App configurations
 │
-└── testng.xml # TestNG Suite File
-
----
+└── testng.xml            # TestNG Suite File
+```
 
 ## 🧪 How to Run the Tests
 1. Clone the repo  
