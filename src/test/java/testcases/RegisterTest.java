@@ -16,7 +16,7 @@ public class RegisterTest extends BaseClass {
         return ExcelUtils.getExcelData("Register");
     }
 
-    @Test(priority = 1, dataProvider = "registerData")
+    @Test(priority = 1, dataProvider = "registerData", groups = "register")
     public void registerNewUserTest(String firstName, String lastName, 
     		        String email, String password, String confirmPassword) {
        
@@ -32,7 +32,10 @@ public class RegisterTest extends BaseClass {
         register.enterLastName(lastName);
      //   softAssert.assertTrue(register.isLastNameValid(), "Last Name invalid: " + lastName);
 
-        register.enterEmail(email);
+        String uniqueEmail = "sammed" + System.currentTimeMillis() + "@mail.com";
+        register.enterEmail(uniqueEmail);
+
+      //  register.enterEmail(email);
     //    softAssert.assertTrue(register.isEmailValid(), "Email invalid: " + email);
 
         register.enterPassword(password);
@@ -45,7 +48,7 @@ public class RegisterTest extends BaseClass {
 
         // Check overall success message (hard assert)
         String successMessage = register.getSucessMessaage();
-        Assert.assertEquals(successMessage, "Your registration completed", "Registration failed for email: " + email);
+        Assert.assertEquals(successMessage, "Your registration completed", "Registration failed for email: " + uniqueEmail);
 
 
         // Collect all soft assert failures

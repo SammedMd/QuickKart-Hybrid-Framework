@@ -9,6 +9,8 @@ public class DataProviderUtils {
         return ExcelUtils.getExcelData("Register");
     }
 
-    // You can add more in future
-    // @DataProvider(name = "loginData") ...
+    @DataProvider(name = "loginData")
+    public static Object[][] getLoginData() {
+        return ExcelUtils.getExcelData("Login");
+    }
 }

@@ -57,10 +57,16 @@ public class RegisterPage {
 	   return driver.findElement(sucessMessage).getText();
    }
 
-public boolean isFirstNameValid() {
-	// TODO Auto-generated method stub
-	return false;
-}
+   public boolean isFirstNameValid() {
+	    // Check if the error message element is present and visible
+	    try {
+	        By firstNameError = By.id("FirstName-error");
+	        return !driver.findElement(firstNameError).isDisplayed();
+	    } catch (Exception e) {
+	        // If element not found, then assume it's valid
+	        return true;
+	    }
+	}
 }
 //public boolean isEmailValid() {
 //	// TODO Auto-generated method stub
