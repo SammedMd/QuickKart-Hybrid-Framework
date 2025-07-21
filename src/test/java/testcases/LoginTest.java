@@ -37,14 +37,14 @@ public class LoginTest extends BaseClass {
         	String actualError = login.getErrorMessage().toLowerCase();
         	String expected = expectedResult.toLowerCase();
 
-        	// 🔍 Debug log in console
+        	//  Debug log in console
         	System.out.println("======== SCENARIO: " + scenarioType + " ========");
         	System.out.println("Expected Result: " + expected);
         	System.out.println("Actual Result:   " + actualError);
         	System.out.println("==========================================");
 
-        	// 🧠 Validate it
-        	Assert.assertTrue(actualError.contains(expected), "❌ Mismatch: Expected vs Actual error message");
+        	//  Validate it
+        	Assert.assertTrue(actualError.contains(expected), "ismatch: Expected vs Actual error message");
 
 
             switch (scenarioType.toLowerCase()) {
