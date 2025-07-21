@@ -15,7 +15,7 @@ import utilities.ConfigurationReader;
 
 public class BaseClass {
 
-    public static WebDriver driver;  // ✅ Declare WebDriver
+    public static WebDriver driver;  
 @BeforeClass
     public void setup() {
         String browser = ConfigurationReader.getProperty("browser");
