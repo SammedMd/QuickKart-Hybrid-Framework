@@ -23,7 +23,7 @@ public void clickAddToCart() {
 
 public String getCartSuccessMessage() {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(cartSuccessMsg)); // 👈 wait until it's visible
+    wait.until(ExpectedConditions.visibilityOfElementLocated(cartSuccessMsg)); // wait until it's visible
     return driver.findElement(cartSuccessMsg).getText();
 }
 }

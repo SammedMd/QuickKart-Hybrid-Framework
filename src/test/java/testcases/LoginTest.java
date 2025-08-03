@@ -36,6 +36,7 @@ public class LoginTest extends BaseClass {
         logger.info("Clicking Login button...");
         loginPage.clickLoginButton();
 
+<<<<<<< HEAD
         SoftAssert softAssert = new SoftAssert();
         String actualMessage = "";
 
@@ -43,6 +44,16 @@ public class LoginTest extends BaseClass {
             logger.info("Checking if login is successful...");
             boolean isSuccess = loginPage.isLoginSuccessful();
             softAssert.assertTrue(isSuccess, "Home Page not loaded / Login Failed");
+=======
+        	//  Debug log in console
+        	System.out.println("======== SCENARIO: " + scenarioType + " ========");
+        	System.out.println("Expected Result: " + expected);
+        	System.out.println("Actual Result:   " + actualError);
+        	System.out.println("==========================================");
+
+        	//  Validate it
+        	Assert.assertTrue(actualError.contains(expected), "ismatch: Expected vs Actual error message");
+>>>>>>> f08d3712346c48a6412554ae104e6fc3c7207683
 
             if (isSuccess) {
                 logger.info("✅ Login successful. Logging out...");
