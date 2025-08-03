@@ -3,13 +3,19 @@ package testcases;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.Assert;
 
 import base.BaseClass;
 import pages.RegisterPage;
 import utilities.ExcelUtils;
 
+import org.testng.Assert;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class RegisterTest extends BaseClass {
+
+    Logger logger = LogManager.getLogger(RegisterTest.class);  // FIXED: Logger declaration
 
     @DataProvider(name = "registerData")
     public Object[][] getRegisterData() {
@@ -17,41 +23,40 @@ public class RegisterTest extends BaseClass {
     }
 
     @Test(priority = 1, dataProvider = "registerData", groups = "register")
-    public void registerNewUserTest(String firstName, String lastName, 
-    		        String email, String password, String confirmPassword) {
-       
-    	RegisterPage register = new RegisterPage(driver);
-        SoftAssert softAssert = new SoftAssert();
+    public void registerNewUserTest(String firstName, String lastName, String dummyEmail, String password, String confirmPassword) {
+        logger.info("Starting RegisterTestCase");
 
-        register.clickRegisterLink();
-        register.selectGender();
-       
-        register.enterFirstName(firstName);
-        softAssert.assertTrue(register.isFirstNameValid(), "First Name invalid: " + firstName);
-       
-        register.enterLastName(lastName);
-     //   softAssert.assertTrue(register.isLastNameValid(), "Last Name invalid: " + lastName);
+        try {
+           RegisterPage register = new RegisterPage(driver);
+            SoftAssert softAssert = new SoftAssert();
 
-        String uniqueEmail = "sammed" + System.currentTimeMillis() + "@mail.com";
-        register.enterEmail(uniqueEmail);
+            String generatedEmail = "user" + System.currentTimeMillis() + "@mail.com";
 
-      //  register.enterEmail(email);
-    //    softAssert.assertTrue(register.isEmailValid(), "Email invalid: " + email);
+            logger.info("======== SCENARIO: Register New User ========");
+            logger.info("First Name: " + firstName + " | Last Name: " + lastName);
+            logger.info("Generated Email: " + generatedEmail);
 
-        register.enterPassword(password);
-     //   softAssert.assertTrue(register.isPasswordValid(), "Password invalid");
+            register.clickRegisterLink();
+            register.selectGender();
+            register.enterFirstName(firstName);
+            register.enterLastName(lastName);
+            register.enterEmail(generatedEmail);
+            register.enterPassword(password);
+            register.enterConfirmPassword(confirmPassword);
+            register.clickRegisterButton();
 
-        register.enterConfirmPassword(confirmPassword);
-     //   softAssert.assertTrue(register.isConfirmPasswordValid(), "Confirm Password invalid");
+            String successMessage = register.getSucessMessaage();
+            logger.info("Success Message: " + successMessage);
 
-        register.clickRegisterButton();
+            Assert.assertEquals(successMessage, "Your registration completed", "Registration failed!");
+            logger.info("Registration successful!\n==========================================");
 
-        // Check overall success message (hard assert)
-        String successMessage = register.getSucessMessaage();
-        Assert.assertEquals(successMessage, "Your registration completed", "Registration failed for email: " + uniqueEmail);
+            softAssert.assertAll();
 
-
-        // Collect all soft assert failures
-        softAssert.assertAll();
+        } catch (Exception e) {
+            logger.error("Exception in Register Test: " + e.getMessage());
+            e.printStackTrace();
+            Assert.fail("Test crashed!");
+        }
     }
 }

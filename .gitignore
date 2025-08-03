@@ -1,0 +1,31 @@
+# ===== Java Class Files =====
+*.class
+
+# ===== Logs (except Logs folder structure) =====
+logs/debug-*.log
+logs/archive/
+logs/*.log
+
+# ===== Maven Target Folder =====
+target/
+
+# ===== Eclipse Project Files =====
+.project
+.classpath
+.settings/
+
+# ===== IntelliJ IDEA Files=====
+.idea/
+*.iml
+
+# ===== VS Code Settings=====
+.vscode/
+
+# ===== System Files =====
+.DS_Store
+Thumbs.db
+
+# ===== Backup or Temp Files =====
+*.bak
+*.tmp
+*.swp

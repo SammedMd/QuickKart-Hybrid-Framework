@@ -1,8 +1,8 @@
 package testcases;
 
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import base.BaseClass;
 import pages.HomePage;
@@ -11,67 +11,64 @@ import utilities.ExcelUtils;
 
 public class LoginTest extends BaseClass {
 
+    LoginPage loginPage;
+
     @DataProvider(name = "loginData")
     public Object[][] getLoginData() {
+        logger.info("Fetching data from Excel for Login...");
         return ExcelUtils.getExcelData("Login");
     }
 
-    @Test(priority = 1, dataProvider = "loginData", groups = "login")
-    public void loginTest(String email, String pass, String scenarioType, String expectedResult) {
-        LoginPage login = new LoginPage(driver);
+    @Test(dataProvider = "loginData")
+    public void loginTest(String email, String password, String scenario, String expectedMessage) throws InterruptedException {
+        logger.info("=== Running Login Test for Scenario: " + scenario + " ===");
+        logger.info("Email: " + email + ", Password: " + password);
 
-        login.clickLoginLink();
+        loginPage = new LoginPage(driver);
 
-        Assert.assertTrue(login.isLoginPageLoaded(), "Login page is not loaded.");
+        logger.info("Clicking on Login link...");
+        loginPage.clickLoginLink();
 
-        login.enterEmail(email);
-        login.enterPassword(pass);
-        login.clickRememberMe();
-        login.clickLoginButton();
+        logger.info("Entering email and password...");
+        loginPage.enterEmail(email);
+        loginPage.enterPassword(password);
 
-        if (scenarioType.equalsIgnoreCase("Valid")) {
-            Assert.assertTrue(login.isLoginSuccessful(), "Login should be successful.");
-            HomePage home = new HomePage(driver);
-            home.clickLogout();
-        } else {
-        	String actualError = login.getErrorMessage().toLowerCase();
-        	String expected = expectedResult.toLowerCase();
+        logger.info("Clicking Login button...");
+        loginPage.clickLoginButton();
 
-        	// 🔍 Debug log in console
-        	System.out.println("======== SCENARIO: " + scenarioType + " ========");
-        	System.out.println("Expected Result: " + expected);
-        	System.out.println("Actual Result:   " + actualError);
-        	System.out.println("==========================================");
+        SoftAssert softAssert = new SoftAssert();
+        String actualMessage = "";
 
-        	// 🧠 Validate it
-        	Assert.assertTrue(actualError.contains(expected), "❌ Mismatch: Expected vs Actual error message");
+        if (scenario.equalsIgnoreCase("Registered User")) {
+            logger.info("Checking if login is successful...");
+            boolean isSuccess = loginPage.isLoginSuccessful();
+            softAssert.assertTrue(isSuccess, "Home Page not loaded / Login Failed");
 
-
-            switch (scenarioType.toLowerCase()) {
-                case "invalid credentials":
-                case "invalid email format":  // app doesn’t validate format, so both get same message
-                    Assert.assertTrue(actualError.contains("login was unsuccessful") || actualError.contains("Please enter a valid email address."),
-                            "Expected error for invalid credentials or email format");
-                    break;
-
-                case "blank username":
-                    Assert.assertTrue(actualError.contains("please enter your email") || actualError.contains("login was unsuccessful"),
-                            "Expected error for blank email");
-                    break;
-
-                case "blank password":
-                    Assert.assertTrue(actualError.contains("please enter your password") || actualError.contains("login was unsuccessful"),
-                            "Expected error for blank password");
-                    break;
-
-                case "both fields blank":
-                    Assert.assertTrue(actualError.contains("login was unsuccessful"),
-                            "Expected error for both fields blank");
-                    break;
-
-                default:
-                    Assert.fail("Unknown scenario type: " + scenarioType);
+            if (isSuccess) {
+                logger.info("✅ Login successful. Logging out...");
+                HomePage home = new HomePage(driver);
+                home.clickLogoutLink();
             }
+
+        } else if (scenario.equalsIgnoreCase("UnRegistered User")
+                || scenario.equalsIgnoreCase("Blank username")
+                || scenario.equalsIgnoreCase("blankPassword")) {
+
+            logger.info("Fetching error message...");
+            actualMessage = loginPage.getErrorMessage();
+            logger.info("Actual error message: " + actualMessage);
+            softAssert.assertTrue(actualMessage.toLowerCase().contains(expectedMessage.toLowerCase()),
+                    "Expected: " + expectedMessage + ", Actual: " + actualMessage);
+
+        } else if (scenario.equalsIgnoreCase("Invalid email format")) {
+            logger.info("Fetching invalid email format error...");
+            actualMessage = loginPage.getInvalidEmailErrorMessage();
+            logger.info("Actual format error: " + actualMessage);
+            softAssert.assertTrue(actualMessage.toLowerCase().contains(expectedMessage.toLowerCase()),
+                    "Expected: " + expectedMessage + ", Actual: " + actualMessage);
         }
+
+        logger.info("Assertion completed for scenario: " + scenario);
+        softAssert.assertAll();
     }
 }

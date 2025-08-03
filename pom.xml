@@ -12,7 +12,7 @@ Automation Framework for Demo Web Shop using Selenium, Java, TestNG</description
   <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
-    <version>4.19.1</version>
+    <version>4.21.0</version>
   </dependency>
 
   <!--WebDriverManager -->
@@ -29,6 +29,12 @@ Automation Framework for Demo Web Shop using Selenium, Java, TestNG</description
     <version>7.11.0</version>
     <scope>test</scope>
   </dependency>
+<!-- SLF4J + Log4j Binding -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-log4j12</artifactId>
+    <version>2.0.9</version> <!-- or match your other log4j/slf4j versions -->
+</dependency>
 
   <!-- Apache POI (for Excel reading/writing) -->
   <dependency>
@@ -43,12 +49,13 @@ Automation Framework for Demo Web Shop using Selenium, Java, TestNG</description
   </dependency>
 
   <!--Log4j (for logging) -->
-  <dependency>
-    <groupId>log4j</groupId>
-    <artifactId>log4j</artifactId>
-    <version>1.2.17</version>
-  </dependency>
-<!-- log4j core -->
+<!-- Log4j 2 (Core + API) -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.20.0</version>
+</dependency>
+
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>

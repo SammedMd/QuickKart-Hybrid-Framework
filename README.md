@@ -1,65 +1,103 @@
 # QuickKart Hybrid Automation Framework 🚀
 
-This is a Hybrid Test Automation Framework built using **Java**, **Selenium WebDriver**, **TestNG**, **Maven**, and **Apache POI**.  
-The project is based on the demo e-commerce application **DemoWebShop** and will be enhanced module-by-module.
+A **Hybrid Test Automation Framework** built with **Java**, **Selenium WebDriver**, **TestNG**, **Maven**, and **Apache POI**, automating workflows on the **Demo Web Shop** site with cross-browser support and modular architecture.
 
 ---
 
 ## ✅ Completed Modules
 
-- [x] **Register Module** — Dynamic data-driven registration using Excel
-- [ ] **Login Module** — (Coming Next)
-- [ ] **Add to Cart**
+- [x] **Register Module** – Data-driven registration using Excel and unique email generation
+- [x] **Login Module** – Validates multiple login scenarios (valid, invalid, blank, invalid format)
+- [x] **Add to Cart** – Product search + add-to-cart with success message validation
 - [ ] **Checkout**
 - [ ] **My Orders**
 - [ ] **Reports, Logs & Screenshots**
 
 ---
 
+## 🌐 Cross-Browser Testing Support
+
+Supports parallel execution on:
+
+- ✅ Chrome  
+- ✅ Firefox  
+- ✅ Edge  
+
+Configured via **TestNG suite** (`testng.xml`).
+
+---
+
 ## 🔧 Technologies & Tools Used
 
-- Java
-- Selenium WebDriver
-- TestNG
-- Apache POI (for Excel data)
-- Maven
-- Log4j (logging)
-- Extent Reports (coming soon)
+- Java  
+- Selenium WebDriver  
+- TestNG  
+- Apache POI (Excel)  
+- Log4j2 (real-time logging)  
+- Extent Reports (HTML reports – will be added)  
+- Maven  
 - Git & GitHub
 
 ---
 
 ## 🧱 Framework Structure
 
-```
 src/
 ├── test/java/
-│   ├── base/             # Base setup and teardown
-│   ├── pages/            # Page Object Model classes
-│   ├── testcases/        # All TestNG test classes
-│   ├── utilities/        # ExcelUtils, DataProvider, ConfigReader
+│ ├── base/ # BaseClass for WebDriver setup & teardown
+│ ├── pages/ # Page classes (LoginPage, RegisterPage, etc.)
+│ ├── testcases/ # TestNG test classes (LoginTest, RegisterTest, etc.)
+│ ├── utilities/ # ExcelUtils, ConfigReader, etc.
 │
 ├── main/resources/
-│   ├── testdata/         # Testdata Excel files
-│   └── config.properties # App configurations
+│ ├── testdata/ # Excel files for test data
+│ ├── config.properties
+│ └── log4j2.xml
 │
-└── testng.xml            # TestNG Suite File
-```
+├── Logs/ # Log4j-generated logs (kept visible for HR review)
+├── testng.xml # Parallel execution config
+
+---
 
 ## 🧪 How to Run the Tests
-1. Clone the repo  
-2. Open in Eclipse/VS Code  
-3. Update `config.properties` with browser + URL  
-4. Right-click on `testng.xml` → Run As → TestNG Suite
+
+1. Clone the repository  
+2. Open in **Eclipse** or **VS Code**  
+3. Run `mvn clean install` to download dependencies  
+4. Update `config.properties` and Excel data if needed  
+5. Right-click `testng.xml` > **Run as TestNG Suite**
 
 ---
 
-## 📌 Author
-- **Sammed Mudeppagol**  
-  QA Automation Engineer | [LinkedIn](https://www.linkedin.com/in/sammedmd/)  
-  📧 Email: mdsammed07@gmail.com  
+## 🧠 Scenario Coverage
+
+### 🔐 Login Scenarios:
+- ✅ Valid Registered User Login  
+- 🚫 Unregistered Email  
+- ❌ Blank Username  
+- ❌ Blank Password  
+- ❗ Invalid Email Format  
 
 ---
 
-## 📌 Note
-> This is an ongoing project. More modules like login, cart, checkout, and reports will be added daily. Stay tuned!
+## 📂 Logs
+
+- ✅ Logs are stored in the `Logs/` directory  
+- ✅ Uses **log4j2** for capturing test execution info  
+- ✅ Includes browser, thread ID, page navigation, test results
+
+---
+
+## 👤 Author
+
+**Sammed Mudeppagol**  
+QA Automation Engineer 
+📧 mdsammed07@gmail.com  
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/sammed-mudeppagoll/)
+
+---
+
+## ⚠️ Note
+
+> This project is actively being developed.  
+> Modules like **Checkout**, **My Orders**, and **Reporting** will be added s

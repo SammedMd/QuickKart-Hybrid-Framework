@@ -1,0 +1,66 @@
+2025-08-03 20:44:30 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 20:44:30 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 20:44:32 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 20:44:35 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 20:44:36 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 20:44:37 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 20:48:28 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 20:48:28 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 20:48:30 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 20:48:34 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 20:48:34 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 20:48:39 INFO  AddToCartTest:32 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 20:48:39 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 20:53:07 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 20:53:07 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 20:53:10 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 20:53:13 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 20:53:13 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 20:53:15 INFO  AddToCartTest:32 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 20:53:16 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 21:01:07 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 21:01:07 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 21:01:10 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 21:01:15 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 21:01:15 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 21:01:18 INFO  AddToCartTest:32 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 21:01:18 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 21:01:31 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 21:01:31 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 21:01:34 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 21:01:36 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 21:01:36 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 21:01:39 INFO  AddToCartTest:32 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 21:01:40 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 21:02:14 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 21:02:14 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 21:02:17 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 21:02:21 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 21:02:21 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 21:02:27 INFO  AddToCartTest:33 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 21:02:28 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 22:40:20 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 22:40:20 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 22:40:50 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 22:40:51 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 22:40:51 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 22:40:52 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 22:40:58 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 22:40:58 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 22:41:03 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 22:41:03 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 22:41:04 INFO  AddToCartTest:33 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 22:41:04 INFO  AddToCartTest:37 - Add to cart Test Passed
+2025-08-03 22:41:04 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 22:41:12 INFO  AddToCartTest:33 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 22:41:12 INFO  AddToCartTest:37 - Add to cart Test Passed
+2025-08-03 22:41:13 INFO  AddToCartTest:66 - Browser closed
+2025-08-03 22:47:42 INFO  AddToCartTest:26 - Running on OS: windows, Browser: chrome
+2025-08-03 22:47:42 INFO  AddToCartTest:27 - Thread ID: Thread[#1,main,5,main]
+2025-08-03 22:47:43 INFO  AddToCartTest:33 - Chrome Launched
+2025-08-03 22:47:48 INFO  AddToCartTest:55 - Navigated to: https://demowebshop.tricentis.com
+2025-08-03 22:47:48 INFO  AddToCartTest:15 - Starting Add to Cart Test
+2025-08-03 22:47:49 INFO  AddToCartTest:21 - Logged In sucessFully
+2025-08-03 22:47:54 INFO  AddToCartTest:32 - Sucess Message: The product has been added to your shopping cart
+2025-08-03 22:47:54 INFO  AddToCartTest:36 - Add to cart Test Passed
+2025-08-03 22:47:54 INFO  AddToCartTest:66 - Browser closed
