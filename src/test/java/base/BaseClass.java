@@ -1,22 +1,29 @@
 package base;
 
 import java.time.Duration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import utilities.ScreenShotUtilities;
 
 public class BaseClass {
 
-    public WebDriver driver;
+    private static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     public Logger logger;
+
+    // Get the current thread's driver
+    public static WebDriver getDriver() {
+        return threadDriver.get();
+    }
 
     @BeforeClass
     @Parameters({"os", "browser"})
@@ -27,42 +34,69 @@ public class BaseClass {
         logger.info("Thread ID: " + Thread.currentThread());
 
         try {
+            WebDriver localDriver = null;
+
             switch (browser.toLowerCase()) {
                 case "chrome":
-                    driver = new ChromeDriver();
+                    WebDriverManager.chromedriver().setup();
+                    localDriver = new ChromeDriver();
                     logger.info("Chrome Launched");
                     break;
+
                 case "firefox":
-                    driver = new FirefoxDriver();
+                    WebDriverManager.firefoxdriver().setup();
+                    localDriver = new FirefoxDriver();
                     logger.info("Firefox Launched");
                     break;
-                case "edge":
-                    EdgeOptions edgeOptions = new EdgeOptions();
-                    edgeOptions.addArguments("--inprivate"); // OR use a temp profile
-                    driver = new EdgeDriver(edgeOptions);
-                    logger.info("Edge Launched");
-                    break;
+
+//                case "edge":
+//                    WebDriverManager.edgedriver().setup();
+//                    EdgeOptions edgeOptions = new EdgeOptions();
+//                    edgeOptions.addArguments("--inprivate");
+//                    localDriver = new EdgeDriver(edgeOptions);
+//                    logger.info("Edge Launched");
+//                    break;
+
                 default:
                     logger.error("Invalid browser name: " + browser);
                     throw new IllegalArgumentException("Unsupported browser: " + browser);
             }
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.manage().window().maximize();
+            threadDriver.set(localDriver); // Store driver per thread
+
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            getDriver().manage().window().maximize();
 
             String appUrl = "https://demowebshop.tricentis.com";
-            driver.get(appUrl);
+            getDriver().get(appUrl);
             logger.info("Navigated to: " + appUrl);
 
-        } catch (Exception e) { 
+        } catch (Exception e) {
             logger.error("Exception during browser setup: ", e);
         }
     }
 
-   @AfterClass
+    @AfterMethod
+    public void captureScreenshotOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            Throwable exception = result.getThrowable();
+            String failureReason = exception != null ? exception.getMessage() : "";
+
+            if (failureReason != null && failureReason.contains("CAPTURE_SCREENSHOT")) {
+                String testName = result.getName();
+                ScreenShotUtilities.captureScreenshot(getDriver(), testName);
+                logger.info("Screenshot captured for failed test: " + testName);
+            } else {
+                logger.warn("Test failed but no screenshot taken (not marked with CAPTURE_SCREENSHOT): " + result.getName());
+            }
+        }
+    }
+
+    @AfterClass
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+        if (getDriver() != null) {
+            getDriver().quit();
+            threadDriver.remove(); // Clean up thread
             logger.info("Browser closed");
         }
     }

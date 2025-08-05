@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import base.BaseClass;
+import pages.HomePage;
 import pages.RegisterPage;
 import utilities.ExcelUtils;
 
@@ -24,28 +25,27 @@ public class RegisterTest extends BaseClass {
 
     @Test(priority = 1, dataProvider = "registerData", groups = "register")
     public void registerNewUserTest(String firstName, String lastName, String dummyEmail, String password, String confirmPassword) {
-        logger.info("Starting RegisterTestCase");
+        logger.info("===Starting Register Test Case ===");
 
         try {
-           RegisterPage register = new RegisterPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            RegisterPage register = new RegisterPage(getDriver());
             SoftAssert softAssert = new SoftAssert();
 
             String generatedEmail = "user" + System.currentTimeMillis() + "@mail.com";
 
-            logger.info("======== SCENARIO: Register New User ========");
+            logger.info("SCENARIO: Register New User");
             logger.info("First Name: " + firstName + " | Last Name: " + lastName);
             logger.info("Generated Email: " + generatedEmail);
 
-            register.clickRegisterLink();
+            homePage.clickRegisterLink();
             register.selectGender();
             register.enterFirstName(firstName);
             register.enterLastName(lastName);
             register.enterEmail(generatedEmail);
             register.enterPassword(password);
             register.enterConfirmPassword(confirmPassword);
-            register.clickRegisterButton();
-
-            String successMessage = register.getSucessMessaage();
+            register.clickRegisterButton();            String successMessage = register.getSucessMessaage();
             logger.info("Success Message: " + successMessage);
 
             Assert.assertEquals(successMessage, "Your registration completed", "Registration failed!");

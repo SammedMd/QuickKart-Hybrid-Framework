@@ -1,5 +1,6 @@
 package testcases;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -15,28 +16,28 @@ public class LoginTest extends BaseClass {
 
     @DataProvider(name = "loginData")
     public Object[][] getLoginData() {
-        logger.info("Fetching data from Excel for Login...");
+        logger.info("📊 Fetching data from Excel for Login...");
         return ExcelUtils.getExcelData("Login");
     }
 
     @Test(dataProvider = "loginData")
-    public void loginTest(String email, String password, String scenario, String expectedMessage) throws InterruptedException {
-        logger.info("=== Running Login Test for Scenario: " + scenario + " ===");
-        logger.info("Email: " + email + ", Password: " + password);
+    public void loginTest(String email, String password, String scenario, String expectedMessage) {
+        logger.info("=== 🧪 Running Login Test for Scenario: " + scenario + " ===");
+        logger.info("Email: " + email + ", 🔒 Password: " + password);
 
-        loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
 
+        // Click login link
         logger.info("Clicking on Login link...");
-        loginPage.clickLoginLink();
+        homePage.clickLoginLink();
 
-        logger.info("Entering email and password...");
+        // Fill form
         loginPage.enterEmail(email);
         loginPage.enterPassword(password);
-
-        logger.info("Clicking Login button...");
         loginPage.clickLoginButton();
 
-<<<<<<< HEAD
+
         SoftAssert softAssert = new SoftAssert();
         String actualMessage = "";
 
@@ -44,42 +45,39 @@ public class LoginTest extends BaseClass {
             logger.info("Checking if login is successful...");
             boolean isSuccess = loginPage.isLoginSuccessful();
             softAssert.assertTrue(isSuccess, "Home Page not loaded / Login Failed");
-=======
-        	//  Debug log in console
-        	System.out.println("======== SCENARIO: " + scenarioType + " ========");
-        	System.out.println("Expected Result: " + expected);
-        	System.out.println("Actual Result:   " + actualError);
-        	System.out.println("==========================================");
 
-        	//  Validate it
-        	Assert.assertTrue(actualError.contains(expected), "ismatch: Expected vs Actual error message");
->>>>>>> f08d3712346c48a6412554ae104e6fc3c7207683
-
-            if (isSuccess) {
-                logger.info("✅ Login successful. Logging out...");
-                HomePage home = new HomePage(driver);
-                home.clickLogoutLink();
+            if (!isSuccess) {
+                throw new RuntimeException("CAPTURE_SCREENSHOT: Login failed for registered user");
             }
+
+            logger.info("Login successful. Logging out...");
+            HomePage home = new HomePage(getDriver());
+            home.clickLogoutLink();
 
         } else if (scenario.equalsIgnoreCase("UnRegistered User")
                 || scenario.equalsIgnoreCase("Blank username")
                 || scenario.equalsIgnoreCase("blankPassword")) {
 
-            logger.info("Fetching error message...");
+            logger.info("❗ Fetching error message...");
             actualMessage = loginPage.getErrorMessage();
-            logger.info("Actual error message: " + actualMessage);
-            softAssert.assertTrue(actualMessage.toLowerCase().contains(expectedMessage.toLowerCase()),
-                    "Expected: " + expectedMessage + ", Actual: " + actualMessage);
+            logger.info("Actual: " + actualMessage);
+
+            if (!actualMessage.toLowerCase().contains(expectedMessage.toLowerCase())) {
+                throw new RuntimeException("CAPTURE_SCREENSHOT: Unexpected error message: " + actualMessage);
+            }
 
         } else if (scenario.equalsIgnoreCase("Invalid email format")) {
-            logger.info("Fetching invalid email format error...");
+            logger.info("❗ Fetching invalid email format error...");
             actualMessage = loginPage.getInvalidEmailErrorMessage();
             logger.info("Actual format error: " + actualMessage);
-            softAssert.assertTrue(actualMessage.toLowerCase().contains(expectedMessage.toLowerCase()),
-                    "Expected: " + expectedMessage + ", Actual: " + actualMessage);
+
+
+            if (!actualMessage.toLowerCase().contains(expectedMessage.toLowerCase())) {
+                throw new RuntimeException("CAPTURE_SCREENSHOT: Invalid email format message mismatch");
+            }
         }
 
-        logger.info("Assertion completed for scenario: " + scenario);
+        logger.info("All validations done for: " + scenario);
         softAssert.assertAll();
     }
 }

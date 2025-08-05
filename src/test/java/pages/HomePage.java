@@ -1,11 +1,9 @@
 package pages;
 
 import java.time.Duration;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,26 +20,48 @@ public class HomePage {
     }
 
     By logoutLink = By.xpath("//a[@class='ico-logout']");
+    By loginLink = By.xpath("//a[@class='ico-login']");
+    By registerLink = By.xpath("//a[@class='ico-register']");
+    By bannerLink = By.xpath("//div[@class='nivoSlider']/a");
 
     public void clickLogoutLink() {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            logger.info("Waiting for header section to load...");
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='header-links']")));
-
-            List<WebElement> logoutLinks = driver.findElements(logoutLink);
-            if (logoutLinks.isEmpty()) {
-                logger.warn("⚠️ Logout link not present in the DOM.");
-            } else {
-                logger.info("Logout link found. Attempting to click...");
-                WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(logoutLinks.get(0)));
-                logoutBtn.click();
-                logger.info("✅ Logout clicked successfully.");
-            }
-
-        } catch (Exception e) {
-            logger.error("❌ Failed to click Logout: " + e.getMessage(), e);
-            throw e;
+        logger.info("Clicking Logout link...");
+        WebElement logoutBtn = driver.findElement(logoutLink);
+        if (logoutBtn.isDisplayed()) {
+            logoutBtn.click();
+            logger.info("Logout clicked successfully.");
+        } else {
+            logger.warn("Logout link not visible.");
         }
     }
+
+    public void clickLoginLink() {
+        logger.info("Clicking Login link...");
+        driver.findElement(loginLink).click();
+    }
+
+    public void clickRegisterLink() {
+        logger.info("Clicking Register link...");
+        driver.findElement(registerLink).click();
+    }
+
+    public void clickOnTopMenu(String menuName) {
+        logger.info("Clicking on menu: " + menuName);
+        driver.findElement(By.xpath("//ul[@class='top-menu']//a[normalize-space()='" + menuName + "']")).click();
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public void clickSliderBanner() {
+        logger.info("Clicking the slider banner...");
+        driver.findElement(bannerLink).click();
+    }
+    public void HomePageVisible() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.titleContains("Demo Web Shop")); // ✅ Title check is stable
+        logger.info("Returned to Demo Web Shop homepage.");
+    }
+
 }

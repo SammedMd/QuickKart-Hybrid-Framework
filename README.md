@@ -1,97 +1,95 @@
-# QuickKart Hybrid Automation Framework 🚀
+# QuickKart - Hybrid Automation Framework
 
-A **Hybrid Test Automation Framework** built with **Java**, **Selenium WebDriver**, **TestNG**, **Maven**, and **Apache POI**, automating workflows on the **Demo Web Shop** site with cross-browser support and modular architecture.
-
----
-
-## ✅ Completed Modules
-
-- [x] **Register Module** – Data-driven registration using Excel and unique email generation
-- [x] **Login Module** – Validates multiple login scenarios (valid, invalid, blank, invalid format)
-- [x] **Add to Cart** – Product search + add-to-cart with success message validation
-- [ ] **Checkout**
-- [ ] **My Orders**
-- [ ] **Reports, Logs & Screenshots**
+This is a hybrid Selenium automation framework for testing the **Demo Web Shop (QuickKart)** website.
 
 ---
 
-## 🌐 Cross-Browser Testing Support
+## 🚀 Features
 
-Supports parallel execution on:
-
-- ✅ Chrome  
-- ✅ Firefox  
-- ✅ Edge  
-
-Configured via **TestNG suite** (`testng.xml`).
-
----
-
-## 🔧 Technologies & Tools Used
-
-- Java  
-- Selenium WebDriver  
-- TestNG  
-- Apache POI (Excel)  
-- Log4j2 (real-time logging)  
-- Extent Reports (HTML reports – will be added)  
-- Maven  
-- Git & GitHub
+- Selenium WebDriver with Java
+- TestNG for test execution
+- Page Object Model (POM) Design Pattern
+- Excel-based Data-Driven Testing (Apache POI)
+- Log4j for logging
+- Extent Reports for rich HTML reports
+- Screenshots for selected failures only
+- Cross-browser Testing (Chrome, Firefox)
+- Parallel execution using TestNG & ThreadLocal WebDriver
 
 ---
 
-## 🧱 Framework Structure
+## 📂 Project Structure
 
-src/
-├── test/java/
-│ ├── base/ # BaseClass for WebDriver setup & teardown
-│ ├── pages/ # Page classes (LoginPage, RegisterPage, etc.)
-│ ├── testcases/ # TestNG test classes (LoginTest, RegisterTest, etc.)
-│ ├── utilities/ # ExcelUtils, ConfigReader, etc.
-│
-├── main/resources/
-│ ├── testdata/ # Excel files for test data
-│ ├── config.properties
-│ └── log4j2.xml
-│
-├── Logs/ # Log4j-generated logs (kept visible for HR review)
-├── testng.xml # Parallel execution config
+src
+└── test
+└── java
+├── base # BaseClass (browser setup/teardown)
+├── pages # Page classes (LoginPage, RegisterPage, etc.)
+├── testcases # Test classes (LoginTest, RegisterTest, etc.)
+├── utilities # ExcelUtils, ScreenshotUtility, ExtentListener, etc.
+└── testdata # Excel files for test data
 
 ---
 
-## 🧪 How to Run the Tests
+## 🧪 Test Execution
 
-1. Clone the repository  
-2. Open in **Eclipse** or **VS Code**  
-3. Run `mvn clean install` to download dependencies  
-4. Update `config.properties` and Excel data if needed  
-5. Right-click `testng.xml` > **Run as TestNG Suite**
+### ✅ Run All Tests in Chrome & Firefox (Parallel)
 
----
+> Right-click on `testng.xml` → Run As → **TestNG Suite**
 
-## 🧠 Scenario Coverage
+This will:
+- Launch both Chrome and Firefox
+- Run tests in the order: Register → Login → Home → AddToCart
+- Generate separate reports per browser
 
-### 🔐 Login Scenarios:
-- ✅ Valid Registered User Login  
-- 🚫 Unregistered Email  
-- ❌ Blank Username  
-- ❌ Blank Password  
-- ❗ Invalid Email Format  
+### ▶️ To Run a Specific Test Class
+
+- Open `testng.xml`
+- Add/remove the `<class name="..."/>` tags under the test section
+- Run the suite again
 
 ---
 
-## 📂 Logs
+## 📸 Screenshots
 
-- ✅ Logs are stored in the `Logs/` directory  
-- ✅ Uses **log4j2** for capturing test execution info  
-- ✅ Includes browser, thread ID, page navigation, test results
+- Screenshots are captured **only when explicitly marked** in your code using a custom `CAPTURE_SCREENSHOT` flag
+- They are saved in the `/screenshots/` folder
+- Helpful for debugging **specific functional bugs only** (not for code errors)
+
+---
+
+## 📑 Reporting
+
+- ExtentReports HTML reports are auto-generated under the `/extent-reports/` folder
+- Separate report per browser (example below):
+
+Report_chrome_20250805_213010.html
+Report_firefox_20250805_213011.html
+
+
+- Each report includes:
+- Test pass/fail status
+- Logs
+- Screenshot (if any) for failed test steps
+
+---
+
+## 🔧 Technologies Used
+
+- Java 17+
+- Selenium WebDriver
+- TestNG
+- Apache POI
+- Log4j
+- ExtentReports
+- Maven
 
 ---
 
 ## 👤 Author
 
 **Sammed Mudeppagol**  
-QA Automation Engineer 
+QA Automation Engineer  
 📧 mdsammed07@gmail.com  
 🔗 [LinkedIn Profile](https://www.linkedin.com/in/sammed-mudeppagoll/)
 
@@ -100,4 +98,4 @@ QA Automation Engineer
 ## ⚠️ Note
 
 > This project is actively being developed.  
-> Modules like **Checkout**, **My Orders**, and **Reporting** will be added s
+> Modules like **Checkout**, **My Orders**, and advanced **Reporting** will be added soon.

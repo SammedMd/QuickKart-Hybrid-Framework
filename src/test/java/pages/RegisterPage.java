@@ -9,8 +9,7 @@ public class RegisterPage {
    public RegisterPage(WebDriver driver) {
 	   this.driver = driver;
    } 
-   //Locators
-   By registerLink = By.className("ico-register");
+   //Locator
    By gender = By.id("gender-male");
    By firstName = By.id("FirstName");
    By lastName = By.id("LastName");
@@ -21,9 +20,6 @@ public class RegisterPage {
    By sucessMessage = By.xpath("//div[@class='result']");
    
    //Actions
-   public void clickRegisterLink() {
-	   driver.findElement(registerLink).click();
-   } 
    
    public void selectGender() {
 	   driver.findElement(gender).click();

@@ -17,7 +17,6 @@ public class LoginPage {
     }
 
     // === Locators ===
-    By loginLink = By.linkText("Log in");
     By emailField = By.id("Email");
     By passwordField = By.id("Password");
     By loginButton = By.cssSelector("input[value='Log in']");
@@ -31,10 +30,7 @@ public class LoginPage {
     // Specific: Invalid Email Format (only when email is syntactically wrong)
     By errorInvalidEmailFormat = By.xpath("//span[@for='Email']");
 
-    // === Actions ===
-    public void clickLoginLink() {
-        driver.findElement(loginLink).click();
-    }
+    // === Actions ==
 
     public void enterEmail(String email) {
         driver.findElement(emailField).clear();

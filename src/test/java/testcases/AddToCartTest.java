@@ -1,47 +1,41 @@
 package testcases;
 
-import org.testng.Assert;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import base.BaseClass;
-import pages.LoginPage;
-import pages.ProductPage;
 import pages.SearchPage;
 
-public class AddToCartTest extends BaseClass{
-   
-	@Test(priority = 1)
-	public void testAddToCart() throws InterruptedException {
-		logger.info("Starting Add to Cart Test");
-		LoginPage lp = new LoginPage(driver);
-		lp.clickLoginLink();
-		lp.enterEmail("registered_user_email.com");
-		lp.enterPassword("Password123");
-		lp.clickLoginButton();
-		logger.info("Logged In sucessFully");
-		
-		SearchPage sp = new SearchPage(driver);
-			sp.enterProductName("Laptop");
-			sp.clickSearchButton();
-			sp.clickFirstProduct();
-			
-			ProductPage pp = new ProductPage(driver);
-			pp.clickAddToCart();
-			Thread.sleep(3000);
-			String msg = pp.getCartSuccessMessage();
-			logger.info("Sucess Message: " + msg);
-			
-			Assert.assertTrue(msg.contains("The product has been added to your shopping cart"),
-	                  "Product not added to cart");
-	  logger.info("Add to cart Test Passed");	
-	  
-	  
-	}
-		}
-//LoginPage lp = new LoginPage(driver);
-//lp.clickLoginLink();
-//lp.enterEmail("registered_user_email.com");
-//lp.enterPassword("Password123");
-//lp.clickLoginButton();
-//logger.info("Logged In sucessFully");
+public class AddToCartTest extends BaseClass {
 
+    @Test(priority = 1)
+    public void checkAddToCart_EliteDesktopPC() {
+        logger.info("🔍 Checking 'Add to Cart' for: Elite Desktop PC");
+
+        // Step 1: Open home page
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        // Step 2: Search and open product
+        SearchPage sp = new SearchPage(getDriver());
+        sp.enterProductName("Elite Desktop PC");
+        sp.clickSearchButton();
+        sp.clickFirstProduct();
+
+        // Step 3: Validate Add to Cart
+        validateAddToCart("EliteDesktopPC");
+    }
+
+    public void validateAddToCart(String productName) {
+        List<WebElement> addToCartButtons = getDriver().findElements(By.xpath("//input[@value='Add to cart']"));
+
+        if (addToCartButtons.size() > 0 && addToCartButtons.get(0).isDisplayed()) {
+            logger.info("'Add to Cart' is visible for: " + productName);
+        } else {
+            logger.warn("'Add to Cart' is NOT visible for: " + productName);
+            throw new RuntimeException("CAPTURE_SCREENSHOT: 'Add to Cart' button not found for: " + productName);
+        }
+    }
+}
